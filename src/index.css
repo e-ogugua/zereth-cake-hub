@@ -1,5 +1,41 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cake-pink: #F472B6;
+  --color-cream-white: #FEF3C7;
+  --color-berry-purple: #A855F7;
+  --color-caramel-orange: #FB923C;
+  --color-sweet-rose: #F9A8D4;
+  --color-vanilla-cream: #FEF7CD;
+  --color-chocolate-brown: #92400E;
+  --color-strawberry-red: #F87171;
+  --color-mint-green: #6EE7B7;
+  --color-lavender-purple: #C084FC;
+  
+  --font-family-sweet: 'Dancing Script', cursive;
+  
+  --animate-sweet-bounce: sweet-bounce 2s ease-in-out infinite;
+  --animate-cake-float: cake-float 4s ease-in-out infinite;
+  --animate-sugar-sparkle: sugar-sparkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes sweet-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes cake-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+@keyframes sugar-sparkle {
+  0% { box-shadow: 0 0 5px #F472B6, 0 0 10px #F472B6; }
+  100% { box-shadow: 0 0 20px #F472B6, 0 0 30px #F472B6, 0 0 40px #F472B6; }
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-family-sweet), system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -15,11 +51,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-cake-pink);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-berry-purple);
 }
 
 body {
@@ -42,12 +78,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-chocolate-brown);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-cake-pink);
 }
 button:focus,
 button:focus-visible {
@@ -60,9 +96,9 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: var(--color-sweet-rose);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--color-vanilla-cream);
   }
 }
