@@ -62,21 +62,21 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-cake-pink/10 via-cream-white to-berry-purple/10">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-pink-100 sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-md border-b border-cake-pink/20 sticky top-0 z-50 animate-sugar-sparkle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-cake-pink to-berry-purple rounded-full flex items-center justify-center animate-cake-float">
                 <ChefHat className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-cake-pink to-berry-purple bg-clip-text text-transparent font-sweet">
                   Zereth Cake Hub
                 </h1>
-                <p className="text-xs text-gray-500">Premium Artisan Cakes</p>
+                <p className="text-xs text-chocolate-brown">Premium Artisan Cakes</p>
               </div>
             </div>
 
@@ -87,17 +87,17 @@ function App() {
                 <input
                   type="text"
                   placeholder="Search for cakes..."
-                  className="w-full pl-10 pr-4 py-2 border border-pink-200 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-cake-pink/30 rounded-full focus:outline-none focus:ring-2 focus:ring-cake-pink focus:border-transparent animate-sugar-sparkle"
                 />
               </div>
             </div>
 
             {/* Actions */}
             <div className="flex items-center space-x-4">
-              <button className="p-2 text-gray-600 hover:text-pink-600 transition-colors">
+              <button className="p-2 text-chocolate-brown hover:text-cake-pink transition-colors animate-sweet-bounce">
                 <Heart className="w-5 h-5" />
               </button>
-              <button className="p-2 text-gray-600 hover:text-pink-600 transition-colors">
+              <button className="p-2 text-chocolate-brown hover:text-cake-pink transition-colors animate-sweet-bounce">
                 <User className="w-5 h-5" />
               </button>
               <button className="relative p-2 text-gray-600 hover:text-pink-600 transition-colors">
