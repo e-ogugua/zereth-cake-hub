@@ -1,31 +1,48 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShoppingCart, 
   Heart, 
   Star, 
   ChefHat, 
   Gift, 
-  Clock, 
-  MapPin, 
-  Phone, 
+  Menu,
+  X,
+  ShoppingBag,
+  Cake,
+  Clock,
+  MapPin,
+  Phone,
   Mail,
   Instagram,
   Facebook,
-  Twitter,
-  Search,
-  User
-} from 'lucide-react'
+  Twitter
+} from 'lucide-react';
 
 function App() {
-  const [activeCategory, setActiveCategory] = useState('all')
-  const [cartItems, setCartItems] = useState(0)
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartItems, setCartItems] = useState(0);
+  
+  // Hero section content
+  const heroContent = {
+    brand: 'Zereth Cakes',
+    heading: 'Handcrafted Cakes for Every Occasion',
+    subheading: 'Indulge in our artisanal cakes made with the finest ingredients',
+    cta: 'Order Now',
+    image: 'https://images.unsplash.com/photo-1571115173804-bf751d1adf2e?w=1200&auto=format&fit=crop&q=80'
+  };
+  
+  const handleAddToCart = () => {
+    setCartItems(cartItems + 1);
+    console.log('Add to cart clicked');
+  };
 
   const categories = [
-    { id: 'all', name: 'All Cakes', count: 24 },
-    { id: 'wedding', name: 'Wedding', count: 8 },
-    { id: 'birthday', name: 'Birthday', count: 12 },
-    { id: 'custom', name: 'Custom', count: 4 }
+    { id: 'all', name: 'All Cakes', count: 24, icon: <Cake className="w-5 h-5" /> },
+    { id: 'wedding', name: 'Wedding', count: 8, icon: <Heart className="w-5 h-5" /> },
+    { id: 'birthday', name: 'Birthday', count: 12, icon: <Gift className="w-5 h-5" /> },
+    { id: 'custom', name: 'Custom', count: 4, icon: <ChefHat className="w-5 h-5" /> }
   ]
 
   const featuredCakes = [
@@ -62,7 +79,41 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cake-pink/10 via-cream-white to-berry-purple/10">
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-r from-cake-500 to-frosting-500 text-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+          <div className="relative z-10">
+            <div className="mb-4">
+              <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium text-white mb-4">
+                Welcome to
+              </span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight text-white drop-shadow-lg">
+              {heroContent.brand}
+            </h1>
+            <h2 className="text-2xl md:text-3xl font-display font-semibold mt-4 text-cake-100">
+              {heroContent.heading}
+            </h2>
+            <p className="mt-6 text-xl text-cake-100 max-w-3xl">
+              {heroContent.subheading}
+            </p>
+            <div className="mt-8">
+              <button 
+                className="px-8 py-3 bg-white text-cake-700 rounded-full font-medium hover:bg-gray-100 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                onClick={() => document.getElementById('featured-cakes')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                {heroContent.cta}
+              </button>
+            </div>
+          </div>
+          <div className="absolute -right-20 -bottom-20 opacity-20 transform rotate-12">
+            <Cake className="w-64 h-64 text-white" />
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-cake-900/20 to-transparent"></div>
+      </div>
+
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-md border-b border-cake-pink/20 sticky top-0 z-50 animate-sugar-sparkle">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,95 +130,104 @@ function App() {
                 <p className="text-xs text-chocolate-brown">Premium Artisan Cakes</p>
               </div>
             </div>
-
-            {/* Search Bar */}
-            <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="text"
-                  placeholder="Search for cakes..."
-                  className="w-full pl-10 pr-4 py-2 border border-cake-pink/30 rounded-full focus:outline-none focus:ring-2 focus:ring-cake-pink focus:border-transparent animate-sugar-sparkle"
-                />
-              </div>
-            </div>
-
-            {/* Actions */}
+            
             <div className="flex items-center space-x-4">
-              <button className="p-2 text-chocolate-brown hover:text-cake-pink transition-colors animate-sweet-bounce">
-                <Heart className="w-5 h-5" />
-              </button>
-              <button className="p-2 text-chocolate-brown hover:text-cake-pink transition-colors animate-sweet-bounce">
-                <User className="w-5 h-5" />
-              </button>
-              <button className="relative p-2 text-gray-600 hover:text-pink-600 transition-colors">
-                <ShoppingCart className="w-5 h-5" />
+              <button 
+                className="p-2 text-text hover:text-primary transition-colors relative"
+                onClick={handleAddToCart}
+              >
+                <ShoppingCart className="h-6 w-6" />
                 {cartItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     {cartItems}
                   </span>
                 )}
               </button>
+              
+              <button className="hidden md:block ml-2 px-6 py-2.5 bg-gradient-to-r from-primary to-secondary text-white font-medium rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Order Now
+              </button>
+              
+              <button 
+                className="md:hidden p-2 text-text hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
             </div>
           </div>
+          
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="md:hidden overflow-hidden"
+              >
+                <nav className="flex flex-col space-y-4 py-4 border-t border-gray-100">
+                  <a href="#" className="text-primary font-medium">Home</a>
+                  <a href="#cakes" className="text-text hover:text-primary">Our Cakes</a>
+                  <a href="#about" className="text-text hover:text-primary">About Us</a>
+                  <a href="#contact" className="text-text hover:text-primary">Contact</a>
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-50">
-          <div className="w-full h-full bg-pink-50 opacity-30"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-left"
-            >
-              <div className="inline-flex items-center px-4 py-2 bg-pink-100 border border-pink-200 rounded-full text-pink-600 text-sm font-medium mb-6">
-                <Gift className="w-4 h-4 mr-2" />
-                Artisan Cake Boutique
-              </div>
-              <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Sweet Dreams
-                <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent"> Made Real</span>
-              </h2>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Handcrafted cakes made with love, premium ingredients, and artistic flair. 
-                From elegant weddings to joyful birthdays, we create memories one slice at a time.
-              </p>
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-white to-secondary/5 py-20 md:py-28">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/food.png')] opacity-5"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="text-center md:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+                  🎉 Freshly Baked Daily
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-800 mb-6 leading-tight">
+                  Artistic Cake Masterpieces for <span className="text-gradient">Every Occasion</span>
+                </h1>
+                <p className="text-lg text-gray-700 mb-8 max-w-lg mx-auto md:mx-0">
+                  Where edible art meets extraordinary taste. Each cake is a canvas, 
+                  handcrafted with precision and passion to turn your celebrations into unforgettable experiences.
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                  <button className="btn-primary flex items-center justify-center gap-2">
+                    <ShoppingBag className="w-5 h-5" />
+                    Shop Now
+                  </button>
+                  <button className="px-6 py-2.5 border-2 border-primary text-primary font-medium rounded-full hover:bg-primary/5 transition-colors flex items-center justify-center gap-2">
+                    <ChefHat className="w-5 h-5" />
+                    Custom Order
+                  </button>
+                </div>
+              </motion.div>
               
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button className="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-semibold hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
-                  Order Custom Cake
-                </button>
-                <button className="px-8 py-4 border-2 border-pink-500 text-pink-600 rounded-full font-semibold hover:bg-pink-50 transition-all">
-                  View Gallery
-                </button>
-              </div>
-
-              {/* Quick Stats */}
-              <div className="grid grid-cols-3 gap-6">
+              <div className="mt-12 flex flex-wrap justify-center md:justify-start gap-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">500+</div>
-                  <div className="text-gray-600 text-sm">Happy Customers</div>
+                  <div className="text-3xl font-bold text-primary">500+</div>
+                  <div className="text-text-light text-sm">Happy Customers</div>
                 </div>
+                <div className="h-12 w-px bg-gray-200"></div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">4.9★</div>
-                  <div className="text-gray-600 text-sm">Average Rating</div>
+                  <div className="text-3xl font-bold text-primary">24/7</div>
+                  <div className="text-text-light text-sm">Available</div>
                 </div>
+                <div className="h-12 w-px bg-gray-200"></div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">24h</div>
-                  <div className="text-gray-600 text-sm">Fresh Daily</div>
+                  <div className="text-3xl font-bold text-primary">50+</div>
+                  <div className="text-text-light text-sm">Cake Varieties</div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Right Visual - Cake Showcase */}
             <motion.div

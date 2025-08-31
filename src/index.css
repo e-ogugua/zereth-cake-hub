@@ -1,52 +1,154 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
-  --color-cake-pink: #F472B6;
-  --color-cream-white: #FEF3C7;
-  --color-berry-purple: #A855F7;
-  --color-caramel-orange: #FB923C;
-  --color-sweet-rose: #F9A8D4;
-  --color-vanilla-cream: #FEF7CD;
-  --color-chocolate-brown: #92400E;
-  --color-strawberry-red: #F87171;
-  --color-mint-green: #6EE7B7;
-  --color-lavender-purple: #C084FC;
-  
-  --font-family-sweet: 'Dancing Script', cursive;
-  
-  --animate-sweet-bounce: sweet-bounce 2s ease-in-out infinite;
-  --animate-cake-float: cake-float 4s ease-in-out infinite;
-  --animate-sugar-sparkle: sugar-sparkle 3s ease-in-out infinite alternate;
+@layer base {
+  :root {
+    /* Color Palette */
+    --color-cake: 255, 107, 26;         /* #ff6b1a - Main cake color */
+    --color-frosting: 240, 107, 78;     /* #f06b4e - Frosting color */
+    --color-sprinkle: 139, 92, 246;     /* #8b5cf6 - Sprinkle color */
+    --color-background: 255, 249, 245;  /* #fff9f5 - Warm white background */
+    --color-foreground: 26, 26, 26;     /* #1a1a1a - Text color */
+    --color-muted: 107, 114, 128;       /* #6b7280 - Muted text */
+    --color-border: 229, 231, 235;      /* #e5e7eb - Border color */
+  }
+
+  html {
+    @apply text-gray-900 bg-white dark:bg-gray-900 dark:text-white;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    @apply font-bold;
+  }
+
+  .font-handwriting {
+    font-family: 'Dancing Script', cursive;
+  }
 }
 
-@keyframes sweet-bounce {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-cake-500 text-white hover:bg-cake-600;
+  }
+  
+  .btn-secondary {
+    @apply bg-sprinkle-500 text-white hover:bg-sprinkle-600;
+  }
 }
 
-@keyframes cake-float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(2deg); }
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce 3s infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-sugar-sparkle {
+    animation: sugar-sparkle 2s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { 
+    transform: translateY(-25%); 
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1); 
+  }
+  50% { 
+    transform: translateY(0); 
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1); 
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 @keyframes sugar-sparkle {
-  0% { box-shadow: 0 0 5px #F472B6, 0 0 10px #F472B6; }
-  100% { box-shadow: 0 0 20px #F472B6, 0 0 30px #F472B6, 0 0 40px #F472B6; }
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  }
 }
 
-:root {
-  font-family: var(--font-family-sweet), system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+a {
+  @apply text-cake-600 hover:text-cake-700 dark:text-cake-400 dark:hover:text-cake-300;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* Custom Utilities */
+.text-gradient {
+  background: linear-gradient(45deg, theme('colors.cake.500'), theme('colors.sprinkle.500'));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.btn-primary {
+  @apply bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full font-medium 
+         shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300;
+}
+
+/* Animation Classes */
+.animate-float {
+  animation: var(--animate-float);
+}
+
+.animate-pulse {
+  animation: var(--animate-pulse);
+}
+
+.animate-bounce {
+  animation: var(--animate-bounce);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
 }
 
 a {
