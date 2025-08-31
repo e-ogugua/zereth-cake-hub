@@ -1,18 +1,80 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme inline {
+  /* Cake-themed color palette */
+  --color-cake-50: #fff0e6;
+  --color-cake-100: #ffd6b3;
+  --color-cake-200: #ffb380;
+  --color-cake-300: #ff8f4d;
+  --color-cake-400: #ff6b1a;
+  --color-cake-500: #e65100;
+  --color-cake-600: #b33d00;
+  --color-cake-700: #802b00;
+  --color-cake-800: #4d1a00;
+  --color-cake-900: #1a0900;
+  --color-cake: #ff6b1a;
+  
+  --color-frosting-50: #fef2f0;
+  --color-frosting-100: #fdd6d1;
+  --color-frosting-200: #fbb9b2;
+  --color-frosting-300: #f99c93;
+  --color-frosting-400: #f78074;
+  --color-frosting-500: #f06b4e;
+  --color-frosting-600: #d84c2e;
+  --color-frosting-700: #a83a23;
+  --color-frosting-800: #782818;
+  --color-frosting-900: #48160d;
+  --color-frosting: #f06b4e;
+  
+  --color-sprinkle-50: #f5f3ff;
+  --color-sprinkle-100: #ede9fe;
+  --color-sprinkle-200: #ddd6fe;
+  --color-sprinkle-300: #c4b5fd;
+  --color-sprinkle-400: #a78bfa;
+  --color-sprinkle-500: #8b5cf6;
+  --color-sprinkle-600: #7c3aed;
+  --color-sprinkle-700: #6d28d9;
+  --color-sprinkle-800: #5b21b6;
+  --color-sprinkle-900: #4c1d95;
+  --color-sprinkle: #8b5cf6;
+  
+  --color-primary-50: #fff0e6;
+  --color-primary-100: #ffd6b3;
+  --color-primary-200: #ffb380;
+  --color-primary-300: #ff8f4d;
+  --color-primary-400: #ff6b1a;
+  --color-primary-500: #e65100;
+  --color-primary-600: #b33d00;
+  --color-primary-700: #802b00;
+  --color-primary-800: #4d1a00;
+  --color-primary-900: #1a0900;
+  --color-primary: #ff6b1a;
+  
+  --color-secondary-50: #f5f3ff;
+  --color-secondary-100: #ede9fe;
+  --color-secondary-200: #ddd6fe;
+  --color-secondary-300: #c4b5fd;
+  --color-secondary-400: #a78bfa;
+  --color-secondary-500: #8b5cf6;
+  --color-secondary-600: #7c3aed;
+  --color-secondary-700: #6d28d9;
+  --color-secondary-800: #5b21b6;
+  --color-secondary-900: #4c1d95;
+  --color-secondary: #8b5cf6;
+  
+  /* Fonts */
+  --font-family-display: 'Playfair Display', serif;
+  --font-family-handwriting: 'Dancing Script', cursive;
+  
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-bounce-slow: bounce 3s infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-sugar-sparkle: sugar-sparkle 2s ease-in-out infinite;
+  --animate-cake-float: cake-float 6s ease-in-out infinite;
+}
 
 @layer base {
-  :root {
-    /* Color Palette */
-    --color-cake: 255, 107, 26;         /* #ff6b1a - Main cake color */
-    --color-frosting: 240, 107, 78;     /* #f06b4e - Frosting color */
-    --color-sprinkle: 139, 92, 246;     /* #8b5cf6 - Sprinkle color */
-    --color-background: 255, 249, 245;  /* #fff9f5 - Warm white background */
-    --color-foreground: 26, 26, 26;     /* #1a1a1a - Text color */
-    --color-muted: 107, 114, 128;       /* #6b7280 - Muted text */
-    --color-border: 229, 231, 235;      /* #e5e7eb - Border color */
-  }
 
   html {
     @apply text-gray-900 bg-white dark:bg-gray-900 dark:text-white;
